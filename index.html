@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noni | CV Pribadi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* ========== GLOBAL ========== */
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+
+    /* ========== LOADING SCREEN ========== */
+    #loading {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0f2027; display: flex;
+      align-items: center; justify-content: center;
+      color: #00ffc3; font-size: 2rem;
+      animation: fadeOut 2s forwards;
+      animation-delay: 2s;
+      z-index: 9999;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* ========== NAVBAR ========== */
+    nav {
+      background: #101e29; padding: 15px;
+      text-align: center; position: sticky; top: 0; z-index: 1000;
+    }
+    nav a {
+      color: #00ffc3; margin: 0 15px;
+      text-decoration: none; font-weight: bold;
+      transition: color .3s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ========== HEADER ========== */
+    header {
+      text-align: center; padding: 80px 20px 20px;
+    }
+    .profile-pic {
+      width: 300px; border-radius: 8%;
+      border: 2px solid #fbfcfc;
+      animation: fadeIn 2s ease;
+    }
+    @keyframes fadeIn { from {opacity:0;} to{opacity:1;} }
+
+    .buttons a {
+      display: inline-block; margin:10px;
+      padding:10px 20px; border-radius:30px;
+      background:#00ffc3; color:#000;
+      font-weight:bold; transition: .3s;
+    }
+    .buttons a:hover { background:#fff; }
+
+    .social-icons a {
+      color:#00ffc3; margin:0 10px; font-size:1.5rem;
+      transition:transform .3s;
+    }
+    .social-icons a:hover { transform: scale(1.2); }
+
+    /* ========== ABOUT + SLIDESHOW ========== */
+    .info {
+    margin-top: 20px;
+    text-align: center; /* Menambahkan ini untuk meratakan teks di tengah */
+    }
+
+    .info p {
+      margin: 5px 0; font-size:1rem;
+    }
+    .slider-container {
+      position: relative;
+      max-width: 500px;
+      margin: 30px auto 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    }
+    .slider-container img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      transition: transform .5s ease;
+    }
+    .slider-container img:hover {
+      transform: scale(1.03);
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #00ffc3; border: none;
+      font-size: 24px; padding: 10px;
+      cursor: pointer; border-radius: 50%;
+      z-index: 10; transition: background .3s;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+
+    .dots {
+      text-align: center; margin: 10px 0 0;
+    }
+    .dot {
+      display: inline-block; width:12px; height:12px;
+      margin:0 4px; background:#bbb; border-radius:50%;
+      cursor:pointer; transition: background .6s;
+    }
+    .dot.active, .dot:hover { background: #00ffc3; }
+
+    /* ========== SKILLS ========== */
+    .skills {
+      display: flex; justify-content: space-around;
+      padding:30px 20px; background:rgba(255,255,255,0.05);
+      flex-wrap: wrap;
+    }
+    .skill-box {
+      width:300px; margin:20px;
+    }
+    .skill-box h3 {
+      border-bottom:1px solid #00ffc3; padding-bottom:5px;
+    }
+    .bar {
+      height:8px; background:#444; border-radius:5px;
+      overflow:hidden; margin:10px 0;
+    }
+    .bar span {
+      display:block; height:100%; background:#00ffc3;
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      padding:50px 20px; background:rgba(0,0,0,0.3);
+      text-align:center;
+    }
+    .contact form { max-width:500px; margin:auto; }
+    .contact input, .contact textarea {
+      width:100%; padding:10px; margin:10px 0;
+      border:none; border-radius:5px;
+    }
+    .contact button {
+      padding:10px 20px; border:none;
+      background: linear-gradient(45deg,#00ffc3,#00b7ff);
+      color:#000; font-weight:bold; cursor:pointer;
+      border-radius:30px; transition: background .5s, transform .2s;
+    }
+    .contact button:hover {
+      background: linear-gradient(45deg,#fff,#00ffc3);
+      transform: scale(1.05);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align:center; padding:20px;
+      background:#101e29; color:#aaa; font-size:.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width:768px) {
+      .skills { flex-direction:column; align-items:center; }
+      .skill-box { width:90%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading...</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">Tentang</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Kontak</a>
+  </nav>
+
+  <header id="home">
+    <img src="muncy.jpg" class="profile-pic" alt="Foto Profil"/>
+    <h1>MUHAMMAD IBNU MUNDZIR</h1>
+    <h2>Mahasiswa Universitas Nahdlatul Ulama Indonesia</h2>
+    <div class="buttons">
+      <a href="CV Muhammad Ibnu Mundzir.pdf" download>Download CV</a>
+      <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcRzDDPCmqbjxmwJFCXqPJfbhcQZHLlFRxljqztRjMKFCVMPZwtpgfmgFtKgPxlshhvxFppFB">Email Me</a>
+      <a href="https://wa.me/6285715232441" target="_blank">WhatsApp</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://web.facebook.com/mncy06/"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/munncyy/"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/wle_yeye"><i class="fab fa-telegram"></i></a>
+    </div>
+  </header>
+
+  <div class="info" id="about">
+    <p>Usia: 21 Tahun</p>
+    <p>Alamat: Pondok Pesantren PNU KANANG</p>
+    <p>Status Freelance: Tersedia ✅</p>
+
+    <div class="slider-container">
+      <img src="KPN5.png" class="slide-image" alt="Foto 1">
+      <img src="KPN6.png" class="slide-image" alt="Foto 2" style="display:none;">
+      <img src="KPN7.png" class="slide-image" alt="Foto 3" style="display:none;">
+
+      <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+      <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+    <div class="dots">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </div>
+
+  <section class="skills" id="skills">
+    <!-- ... skill-boxes ... -->
+  </section>
+  <section class="contact" id="contact">
+    <h2>Kontak Saya</h2>
+    <form id="contact-form" 
+          action="https://script.google.com/macros/s/AKfycbxoqtnLSSkHNkk7TuLpcXER-dueKAc-oOAVeiVzqfwO4q_ZixI7gBJ6KWwsrJXit-_h/exec" 
+          method="POST">
+          
+      <input type="text"   name="name"    placeholder="Nama Anda" required>
+      <input type="email"  name="email"   placeholder="Email Anda" required>
+      <textarea name="message" rows="5"   placeholder="Pesan Anda" required></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+  </section>
+  
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const data = new FormData(form);
+      
+      // Kirim ke Apps Script
+      const resp = await fetch(form.action, {
+        method: "POST",
+        body: data
+      });
+      const result = await resp.json();
+      
+      if (result.result === "success") {
+        alert("Terima kasih, pesan Anda telah terkirim!");
+        form.reset();
+      } else {
+        alert("Terjadi kesalahan. Silakan coba lagi.");
+        console.error(result.error);
+      }
+    });
+    </script>
+    
+
+  <footer>
+    &copy; 2025 Muhammad Ibnu Mundzir. All rights reserved.
+  </footer>
+
+  <script>
+    // Loading
+    window.onload = () => document.getElementById('loading').style.display = 'none';
+
+    // Slider
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function currentSlide(n) { showSlides(slideIndex = n); }
+    function showSlides(n) {
+      const slides = document.querySelectorAll('.slider-container .slide-image');
+      const dots   = document.querySelectorAll('.dot');
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+      slides.forEach((s,i) => {
+        s.style.display = (i+1 === slideIndex) ? 'block' : 'none';
+        dots[i].classList.toggle('active', i+1 === slideIndex);
+      });
+    }
+    setInterval(() => plusSlides(1), 7000);
+  </script>
+</body>
+</html>
